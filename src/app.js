@@ -1,25 +1,22 @@
 if (process.env.USER) require("dotenv").config();
-const knex = require("./db/connection");
 const express = require("express");
+const moviesRouter = require("./movies/movies.router");
 const app = express();
 
-app.get("/movies/:movieId", (req, res) => {
-  const { movieId } = req.params;
+app.use("/movies", moviesRouter);
 
-  knex("movies")
-    .select("*")
-    .where({ movie_id: movieId })
-    .first()
-    .then((data) => res.json({ data }));
+/** handle routes error **/
+app.use((req, res, next) => {
+  next({
+    error: 404,
+    message: "route not found.",
+  });
 });
 
-app.get("/movies", (req, res) => {
-  knex
-    .from("movies")
-    .select("*")
-    .then((data) => res.json({ data }));
+/** handle all error **/
+app.use((err, req, res, next) => {
+  const { error = 500, message = "all error" } = err;
+  res.json({ error, message });
 });
-
-
 
 module.exports = app;
