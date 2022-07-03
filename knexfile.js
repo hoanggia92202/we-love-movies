@@ -12,7 +12,7 @@ module.exports = {
     connection:
       "postgres://qcmifoxu:DhLhNyGjZFwUp64Y0vdDAGGG5P869RTC@kashin.db.elephantsql.com/qcmifoxu",
     password: "DhLhNyGjZFwUp64Y0vdDAGGG5P869RTC",
-    pool: { min: 0, max: 5 },
+    pool: { min: 0, max: 200 },
     migrations: {
       directory: path.join(__dirname, "src", "db", "migrations"),
     },

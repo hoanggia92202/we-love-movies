@@ -1,7 +1,14 @@
 const service = require("./movies.service");
 
 const list = async (req, res) => {
-  res.json({ data: await service.list() });
+  const { is_showing } = req.query;
+
+  if (is_showing === "true") {
+    const result = await service.isShowing();
+    res.json({ data: result.splice(30) });
+  } else {
+    res.json({ data: await service.list() });
+  }
 };
 
 const read = async (req, res) => {
