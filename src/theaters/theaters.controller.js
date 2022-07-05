@@ -2,6 +2,8 @@ const service = require("./theaters.service");
 const reduceProperties = require("../utils/reduce-properties");
 
 const read = async (req, res) => {
+  /** This function is used to put all the movies **/
+  /** that belong to a single theater in an array **/
   const reduceMovies = reduceProperties("theater_id", {
     movie_id: ["movies", null, "movie_id"],
     title: ["movies", null, "title"],
@@ -10,12 +12,8 @@ const read = async (req, res) => {
     description: ["movies", null, "description"],
     image_url: ["movies", null, "image_url"],
   });
-
-  const result = await service.read();
-
-  console.log(JSON.stringify(reduceMovies(result), null, 4));
-  //console.log("read >>>>>>", result);
-  res.json({ data: reduceMovies(result) });
+  const data = await service.read();
+  res.json({ data: reduceMovies(data) });
 };
 
 module.exports = {

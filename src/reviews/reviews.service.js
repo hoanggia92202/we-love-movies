@@ -1,7 +1,7 @@
 const knex = require("../db/connection");
 
-//join critic and reviews table
-const readReview = (reviewId) => {
+/** join Reviews and Critics table **/
+const readReviewAndCritic = (reviewId) => {
   return knex("critics")
     .join("reviews", "critics.critic_id", "reviews.critic_id")
     .select("reviews.*", "critics.*")
@@ -30,7 +30,7 @@ const destroy = (reviewId) => {
 
 module.exports = {
   read,
-  readReview,
+  readReviewAndCritic,
   update,
   delete: destroy,
 };

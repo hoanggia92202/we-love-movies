@@ -27,7 +27,7 @@ const readTheaters = (movieId) => {
     .where("movies_theaters.movie_id", movieId);
 };
 
-/** resolve all reviews by movie ID **/
+/** return all reviews by movie ID **/
 const readReviews = (movieId) => {
   return knex("movies")
     .join("reviews", "movies.movie_id", "reviews.movie_id")

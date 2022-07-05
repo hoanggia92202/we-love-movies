@@ -1,7 +1,6 @@
 const service = require("./reviews.service");
 
 /** routes middleware **/
-
 const hasCorrectId = async (req, res, next) => {
   const { reviewId } = req.params;
   const reviewExist = await service.read(reviewId);
@@ -15,7 +14,6 @@ const hasCorrectId = async (req, res, next) => {
 };
 
 /** routes handler **/
-
 /** update a review by ID **/
 const reviewUpdate = async (req, res) => {
   const { reviewId } = req.params;
@@ -25,7 +23,7 @@ const reviewUpdate = async (req, res) => {
   };
   const updateSuccess = await service.update(data);
   if (updateSuccess) {
-    const updatedReview = await service.readReview(reviewId);
+    const updatedReview = await service.readReviewAndCritic(reviewId);
     const {
       critic_id,
       preferred_name,

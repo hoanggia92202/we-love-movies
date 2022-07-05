@@ -1,7 +1,6 @@
 const service = require("./movies.service");
 
 /** routes middleware **/
-
 const hasCorrectId = async (req,res,next) => {
   const { movieId } = req.params;
   const movieExist = await service.read(movieId)
@@ -15,7 +14,6 @@ const hasCorrectId = async (req,res,next) => {
 }
 
 /** routes handler **/
-
 const list = async (req, res) => {
   const { is_showing } = req.query;
   /** resolve only movies that is currently showing **/
@@ -43,7 +41,6 @@ const readTheaters = async (req, res) => {
 const readReviews = async (req, res) => {
   const { movieId } = req.params;
   const reviews = await service.readReviews(movieId);
-
   const updatedReview = reviews.map((review) => {
     const {
       critic_id,
