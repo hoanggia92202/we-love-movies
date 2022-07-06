@@ -8,8 +8,9 @@ const list = () => {
 /** return only movies with status is_showing === true **/
 const isShowing = () => {
   return knex("movies")
-    .join("movies_theaters", "movies.movie_id", "movies_theaters.movie_id")
+    .join("movies_theaters", "movies_theaters.movie_id", "movies.movie_id")
     .join("theaters", "theaters.theater_id", "movies_theaters.theater_id")
+    .distinct("movies.movie_id", "movies.*")
     .where({ is_showing: true });
 };
 

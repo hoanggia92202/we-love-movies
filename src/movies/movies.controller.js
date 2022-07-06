@@ -18,7 +18,7 @@ const list = async (req, res) => {
   const { is_showing } = req.query;
   /** resolve only movies that is currently showing **/
   if (is_showing === "true") {
-    res.json({ data: (await service.isShowing()).splice(30) });
+    res.json({ data: await service.isShowing() });
   } else {
     /** resolve all movies **/
     res.json({ data: await service.list() });
